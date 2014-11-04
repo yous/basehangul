@@ -30,7 +30,7 @@ gem install basehangul
 
 ## Usage
 
-``` irb
+``` ruby
 BaseHangul.encode('This is an encoded string')
 # => "넥라똔먈늴멥갯놓궂뗐밸뮤뉴뗐뀄굡덜멂똑뚤"
 
