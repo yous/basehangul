@@ -1,5 +1,6 @@
 # BaseHangul
 
+[![Gem Version](https://badge.fury.io/rb/basehangul.svg)](http://badge.fury.io/rb/basehangul)
 [![Build Status](https://travis-ci.org/yous/basehangul.svg?branch=master)](https://travis-ci.org/yous/basehangul)
 [![Dependency Status](https://gemnasium.com/yous/basehangul.svg)](https://gemnasium.com/yous/basehangul)
 [![Code Climate](https://codeclimate.com/github/yous/basehangul/badges/gpa.svg)](https://codeclimate.com/github/yous/basehangul)
