@@ -47,4 +47,48 @@ RSpec.describe BaseHangul::Utils do
       end
     end
   end
+
+  describe '.chunks' do
+    context 'with empty string' do
+      it 'returns an empty array' do
+        [1, 5, 100].each do |size|
+          chunks = utils.chunks('', size)
+          expect(chunks).to match_array([])
+        end
+      end
+    end
+
+    context 'with string of which length is multiple of size' do
+      it 'returns an array of chunks' do
+        # rubocop:disable Style/WordArray
+        chunks = utils.chunks('foo', 1)
+        expect(chunks).to match_array(['f', 'o', 'o'])
+        chunks = utils.chunks('foobarbaz', 3)
+        expect(chunks).to match_array(['foo', 'bar', 'baz'])
+        # rubocop:enable Style/WordArray
+      end
+    end
+
+    context 'with string of which length is not multiple of size' do
+      it 'returns an array of chunks' do
+        # rubocop:disable Style/WordArray
+        chunks = utils.chunks('abcd1234A', 4)
+        expect(chunks).to match_array(['abcd', '1234', 'A'])
+        chunks = utils.chunks('abcd1234AB', 4)
+        expect(chunks).to match_array(['abcd', '1234', 'AB'])
+        chunks = utils.chunks('abcd1234ABC', 4)
+        expect(chunks).to match_array(['abcd', '1234', 'ABC'])
+        # rubocop:enable Style/WordArray
+      end
+    end
+
+    context 'with invalid size' do
+      it 'raises ArgumentError' do
+        [0, -1, -5].each do |size|
+          expect { utils.chunks('foo', size) }
+            .to raise_error(ArgumentError, 'Invalid slice size')
+        end
+      end
+    end
+  end
 end

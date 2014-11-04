@@ -32,5 +32,20 @@ module BaseHangul
       (index / 0x5E * 0x100 + index % 0x5E + 0xB0A1).chr(Encoding::EUC_KR)
         .encode(Encoding::UTF_8)
     end
+
+    # Slice a string into chunks of a given size.
+    #
+    # str  - The String to slice.
+    # size - The Integer max size of each chunk.
+    #
+    # Returns an Array of chunked Strings.
+    # Raises ArgumentError if the size is smaller then or equal to 0.
+    def self.chunks(str, size)
+      fail ArgumentError, 'Invalid slice size' if size <= 0
+      new_str = str.dup
+      array = []
+      array << new_str.slice!(0...size) until new_str.empty?
+      array
+    end
   end
 end
