@@ -46,6 +46,10 @@ BaseHangul.decode('넥라똔먈늴멥갯놓궂뗐밸뮤뉴뗐뀄굡덜멂똑뚤'
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
 ## License
 
 Copyright (c) ChaYoung You. See [LICENSE.txt](LICENSE.txt) for further details.
