@@ -5,7 +5,7 @@ require 'basehangul/version'
 # Binary encoder using hangul.
 module BaseHangul
   # Character for padding on encoding.
-  PADDING = '흐'.encode(Encoding::EUC_KR).freeze
+  PADDING = '흐'.freeze
   private_constant :PADDING
 
   private
@@ -18,7 +18,7 @@ module BaseHangul
   # Raises ArgumentError if the character is not valid for BaseHangul.
   def self.to_index(hangul)
     return -1 if hangul == PADDING
-    offset = hangul.ord - 0xB0A1
+    offset = hangul.encode(Encoding::EUC_KR).ord - 0xB0A1
     index = offset / 0x100 * 0x5E + offset % 0x100
     if index < 0 || index > 1023
       fail ArgumentError, 'Not a valid BaseHangul string'
@@ -37,5 +37,6 @@ module BaseHangul
       fail IndexError, "Index #{index} outside of valid range: 0..1023"
     end
     (index / 0x5E * 0x100 + index % 0x5E + 0xB0A1).chr(Encoding::EUC_KR)
+      .encode(Encoding::UTF_8)
   end
 end

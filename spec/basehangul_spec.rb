@@ -6,7 +6,8 @@ RSpec.describe BaseHangul do
 
   describe '#to_index' do
     it 'converts hangul to index' do
-      range = '가'.encode(Encoding::EUC_KR)..'빌'.encode(Encoding::EUC_KR)
+      range = ('가'.encode(Encoding::EUC_KR)..'빌'.encode(Encoding::EUC_KR))
+              .map { |v| v.encode(Encoding::UTF_8) }
       range.each_with_index do |hangul, expected|
         index = basehangul.send(:to_index, hangul)
         expect(index).to eq(expected)
@@ -19,7 +20,8 @@ RSpec.describe BaseHangul do
     end
 
     it 'raises ArgumentError for invalid hangul' do
-      range = '빎'.encode(Encoding::EUC_KR)..'힝'.encode(Encoding::EUC_KR)
+      range = ('빎'.encode(Encoding::EUC_KR)..'힝'.encode(Encoding::EUC_KR))
+              .map { |v| v.encode(Encoding::UTF_8) }
       range.reject { |v| v == padding }.each do |hangul|
         expect { basehangul.send(:to_index, hangul) }
           .to raise_error(ArgumentError, 'Not a valid BaseHangul string')
@@ -29,7 +31,8 @@ RSpec.describe BaseHangul do
 
   describe '#to_hangul' do
     it 'converts index to hangul' do
-      range = ('가'.encode(Encoding::EUC_KR)..'빌'.encode(Encoding::EUC_KR)).to_a
+      range = ('가'.encode(Encoding::EUC_KR)..'빌'.encode(Encoding::EUC_KR))
+              .map { |v| v.encode(Encoding::UTF_8) }
       (0..1023).each do |index|
         hangul = basehangul.send(:to_hangul, index)
         expect(range.index(hangul)).to eq(index)
