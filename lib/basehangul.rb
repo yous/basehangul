@@ -3,7 +3,7 @@
 require 'basehangul/version'
 require 'basehangul/utils'
 
-# Binary encoder using hangul.
+# Human-readable binary encoding.
 module BaseHangul
   # Character for padding on encoding.
   PADDING = '흐'.freeze

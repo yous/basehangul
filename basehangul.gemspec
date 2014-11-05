@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.version       = BaseHangul::Version::STRING
   spec.authors       = ['ChaYoung You']
   spec.email         = %w(yousbe@gmail.com)
-  spec.summary       = 'BaseHangul for Ruby.'
-  spec.description   = 'BaseHangul for Ruby.'
+  spec.summary       = 'Human-readable binary encoding, BaseHangul for Ruby.'
+  spec.description   = 'Human-readable binary encoding, BaseHangul for Ruby.'
   spec.homepage      = ''
   spec.license       = 'MIT'
 
