@@ -7,6 +7,20 @@ module BaseHangul
     #
     # hangul - A hangul character encoded with BaseHangul.
     #
+    # Examples
+    #
+    #   to_index('가')
+    #   # => 0
+    #
+    #   to_index('빌')
+    #   # => 1023
+    #
+    #   to_index('빗')
+    #   # => 1027
+    #
+    #   to_index('흐')
+    #   # => -1
+    #
     # Returns the Integer index of the hangul between 0 to 1027.
     # Raises ArgumentError if the character is not valid for BaseHangul.
     def self.to_index(hangul)
@@ -23,6 +37,17 @@ module BaseHangul
     #
     # index - An Integer to convert.
     #
+    # Examples
+    #
+    #   to_hangul(0)
+    #   # => '가'
+    #
+    #   to_hangul(1023)
+    #   # => '빌'
+    #
+    #   to_hangul(1027)
+    #   # => '빗'
+    #
     # Returns the String hangul for given index.
     # Raises IndexError if the index is out of range 0..1027.
     def self.to_hangul(index)
@@ -37,6 +62,20 @@ module BaseHangul
     #
     # str  - The String to slice.
     # size - The Integer max size of each chunk.
+    #
+    # Examples
+    #
+    #   chunks('foo', 1)
+    #   # => ['f', 'o', 'o']
+    #
+    #   chunks('foobarbaz', 3)
+    #   # => ['foo', 'bar', 'baz']
+    #
+    #   chunks('abcd1234AB', 4)
+    #   # => ['abcd', '1234', 'AB']
+    #
+    #   chunks('', 1)
+    #   # => []
     #
     # Returns an Array of chunked Strings.
     # Raises ArgumentError if the size is smaller then or equal to 0.

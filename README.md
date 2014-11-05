@@ -35,10 +35,10 @@ gem install basehangul
 
 ``` ruby
 BaseHangul.encode('This is an encoded string')
-# => "넥라똔먈늴멥갯놓궂뗐밸뮤뉴뗐뀄굡덜멂똑뚤"
+# => '넥라똔먈늴멥갯놓궂뗐밸뮤뉴뗐뀄굡덜멂똑뚤'
 
 BaseHangul.decode('넥라똔먈늴멥갯놓궂뗐밸뮤뉴뗐뀄굡덜멂똑뚤')
-# => "This is an encoded string"
+# => 'This is an encoded string'
 ```
 
 ## Contributing
