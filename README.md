@@ -9,7 +9,7 @@
 
 Human-readable binary encoding, [BaseHangul](https://github.com/koreapyj/basehangul) for Ruby.
 
-BaseHangul is an binary encoder using hangul. You can see [the specification](http://api.dcmys.jp/basehangul/) of it.
+BaseHangul is an binary encoder using hangul. You can see [the specification](http://basehangul.github.io) of it.
 
 ## Installation
 
