@@ -7,9 +7,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/yous/basehangul.svg)](https://coveralls.io/r/yous/basehangul)
 [![Inline docs](http://inch-ci.org/github/yous/basehangul.svg?branch=master)](http://inch-ci.org/github/yous/basehangul)
 
-Human-readable binary encoding, [BaseHangul](https://github.com/koreapyj/basehangul) for Ruby.
-
-BaseHangul is an binary encoder using hangul. You can see [the specification](https://basehangul.github.io) of it.
+Human-readable binary encoding, [BaseHangul](https://basehangul.github.io) for Ruby.
 
 ## Installation
 
