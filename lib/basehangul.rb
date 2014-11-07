@@ -27,7 +27,8 @@ module BaseHangul
     chunks.map { |b| Utils.to_hangul(b.ljust(10, '0').to_i(2)) }.join + padding
   end
 
-  # Public: Decode BaseHangul string.
+  # Public: Decode BaseHangul string. Characters outside the BaseHangul are
+  # ignored.
   #
   # str - A String encoded with BaseHangul.
   #

@@ -22,7 +22,7 @@ module BaseHangul
     #   # => -1
     #
     # Returns the Integer index of the hangul between 0 to 1027 or nil if the
-    #   character is not valid for BaseHangul.
+    #   character is invalid for BaseHangul.
     def self.to_index(hangul)
       return -1 if hangul == PADDING
       offset = hangul.encode(Encoding::EUC_KR).ord - 0xB0A1
