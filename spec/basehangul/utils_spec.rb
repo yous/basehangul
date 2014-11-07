@@ -19,12 +19,15 @@ RSpec.describe BaseHangul::Utils do
       expect(index).to eq(-1)
     end
 
-    it 'raises ArgumentError for invalid hangul' do
-      range = ('빙'.encode(Encoding::EUC_KR)..'힝'.encode(Encoding::EUC_KR))
-              .map { |v| v.encode(Encoding::UTF_8) }
+    it 'returns nil for invalid character' do
+      range = ["\x00", "\uFFFF",
+               'A', 'b', '1',
+               '갂', '갃', '뷁',
+               *('빙'.encode(Encoding::EUC_KR)..'힝'.encode(Encoding::EUC_KR))
+                .map { |v| v.encode(Encoding::UTF_8) }]
       range.reject { |v| v == padding }.each do |hangul|
-        expect { utils.to_index(hangul) }
-          .to raise_error(ArgumentError, 'Not a valid BaseHangul string')
+        index = utils.to_index(hangul)
+        expect(index).to eq(nil)
       end
     end
   end

@@ -148,5 +148,17 @@ RSpec.describe BaseHangul do
         expect(decoded).to eq('1234567890')
       end
     end
+
+    context 'when there are invalid characters' do
+      it 'ignores invalid characters' do
+        strings = [' 꺽먹꼍녜',
+                   '꺽먹꼍녜 ',
+                   "\n꺽\t먹\u3000꼍abc녜"]
+        strings.each do |encoded|
+          decoded = basehangul.decode(encoded)
+          expect(decoded).to eq('123ab')
+        end
+      end
+    end
   end
 end

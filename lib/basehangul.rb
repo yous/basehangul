@@ -36,7 +36,7 @@ module BaseHangul
     indices = str.each_char.map { |ch| Utils.to_index(ch) }
     binary = indices.map do |index|
       case index
-      when -1         then ''
+      when nil, -1    then ''
       when 0..1023    then index.to_s(2).rjust(10, '0')
       when 1024..1027 then (index - 1024).to_s(2).rjust(2, '0')
       end

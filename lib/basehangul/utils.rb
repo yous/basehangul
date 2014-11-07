@@ -21,16 +21,16 @@ module BaseHangul
     #   to_index('흐')
     #   # => -1
     #
-    # Returns the Integer index of the hangul between 0 to 1027.
-    # Raises ArgumentError if the character is not valid for BaseHangul.
+    # Returns the Integer index of the hangul between 0 to 1027 or nil if the
+    #   character is not valid for BaseHangul.
     def self.to_index(hangul)
       return -1 if hangul == PADDING
       offset = hangul.encode(Encoding::EUC_KR).ord - 0xB0A1
       index = offset / 0x100 * 0x5E + offset % 0x100
-      if index < 0 || index > 1027
-        fail ArgumentError, 'Not a valid BaseHangul string'
-      end
+      return nil if index < 0 || index > 1027
       index
+    rescue Encoding::UndefinedConversionError
+      nil
     end
 
     # Convert a index to hangul character.
