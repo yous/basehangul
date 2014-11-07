@@ -7,7 +7,19 @@ require 'basehangul/utils'
 module BaseHangul
   # Character for padding on encoding.
   PADDING = '흐'.freeze
-  private_constant :PADDING
+
+  # Error message for invalid character.
+  MSG_INVALID_CHAR = 'Invalid character found'
+
+  # Error message for incorrect padding.
+  MSG_INVALID_PADDING = 'Invalid padding'
+
+  # Regular expression for BaseHangul.
+  REGEX_BASEHANGUL = Regexp.new('^(?:[^빎빔빕빗흐]{4})*' \
+    '(?:[^빎빔빕빗흐]흐{3}|[^빎빔빕빗흐]{2}흐{2}|' \
+    '[^빎빔빕빗흐]{3}[빎빔빕빗흐])?$').freeze
+
+  private_constant :PADDING, :MSG_INVALID_CHAR, :MSG_INVALID_PADDING
 
   # Public: Encode binary with BaseHangul.
   #
@@ -37,7 +49,30 @@ module BaseHangul
     indices = str.each_char.map { |ch| Utils.to_index(ch) }
     binary = indices.map do |index|
       case index
-      when nil, -1    then ''
+      when 0..1023    then index.to_s(2).rjust(10, '0')
+      when 1024..1027 then (index - 1024).to_s(2).rjust(2, '0')
+      end
+    end.join
+    binary = binary[0..-(binary.size % 8 + 1)]
+    [binary].pack('B*')
+  end
+
+  # Public: Decode BaseHangul string.
+  #
+  # str - A String encoded with BaseHangul.
+  #
+  # Returns the String decoded binary.
+  # Raises ArgumentError if str is invalid BaseHangul.
+  def self.strict_decode(str)
+    indices = []
+    str.each_char do |ch|
+      index = Utils.to_index(ch)
+      fail ArgumentError, MSG_INVALID_CHAR if index.nil?
+      indices << index
+    end
+    fail ArgumentError, MSG_INVALID_PADDING unless str =~ REGEX_BASEHANGUL
+    binary = indices.map do |index|
+      case index
       when 0..1023    then index.to_s(2).rjust(10, '0')
       when 1024..1027 then (index - 1024).to_s(2).rjust(2, '0')
       end
