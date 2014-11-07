@@ -17,6 +17,10 @@ RSpec.describe BaseHangul do
         expect(encoded).to eq('꺽먹꼍녜')
         encoded = basehangul.encode("123d\x00")
         expect(encoded).to eq('꺽먹꼐가')
+        encoded = basehangul.encode('1234567890')
+        expect(encoded).to eq('꺽먹께겔꼍뮷뒝낮')
+        encoded = basehangul.encode("12345678d\x00")
+        expect(encoded).to eq('꺽먹께겔꼍뮷듕가')
       end
     end
 
@@ -28,6 +32,12 @@ RSpec.describe BaseHangul do
         expect(encoded).to eq('꺽먈흐흐')
         encoded = basehangul.encode('123')
         expect(encoded).to eq('꺽먹꺄흐')
+        encoded = basehangul.encode('123456')
+        expect(encoded).to eq('꺽먹께겔꼍흐흐흐')
+        encoded = basehangul.encode('1234567')
+        expect(encoded).to eq('꺽먹께겔꼍뮨흐흐')
+        encoded = basehangul.encode('12345678')
+        expect(encoded).to eq('꺽먹께겔꼍뮷됩흐')
       end
     end
 
@@ -41,6 +51,14 @@ RSpec.describe BaseHangul do
         expect(encoded).to eq('꺽먹꼐빕')
         encoded = basehangul.encode('123g')
         expect(encoded).to eq('꺽먹꼐빗')
+        encoded = basehangul.encode('12345678d')
+        expect(encoded).to eq('꺽먹께겔꼍뮷듕빎')
+        encoded = basehangul.encode('12345678e')
+        expect(encoded).to eq('꺽먹께겔꼍뮷듕빔')
+        encoded = basehangul.encode('12345678f')
+        expect(encoded).to eq('꺽먹께겔꼍뮷듕빕')
+        encoded = basehangul.encode('12345678g')
+        expect(encoded).to eq('꺽먹께겔꼍뮷듕빗')
       end
     end
   end
@@ -59,6 +77,10 @@ RSpec.describe BaseHangul do
         expect(decoded).to eq('123ab')
         decoded = basehangul.decode('꺽먹꼐가')
         expect(decoded).to eq("123d\x00")
+        decoded = basehangul.decode('꺽먹께겔꼍뮷뒝낮')
+        expect(decoded).to eq('1234567890')
+        decoded = basehangul.decode('꺽먹께겔꼍뮷듕가')
+        expect(decoded).to eq("12345678d\x00")
       end
     end
 
@@ -70,6 +92,12 @@ RSpec.describe BaseHangul do
         expect(decoded).to eq('12')
         decoded = basehangul.decode('꺽먹꺄흐')
         expect(decoded).to eq('123')
+        decoded = basehangul.decode('꺽먹께겔꼍흐흐흐')
+        expect(decoded).to eq('123456')
+        decoded = basehangul.decode('꺽먹께겔꼍뮨흐흐')
+        expect(decoded).to eq('1234567')
+        decoded = basehangul.decode('꺽먹께겔꼍뮷됩흐')
+        expect(decoded).to eq('12345678')
       end
     end
 
@@ -83,6 +111,14 @@ RSpec.describe BaseHangul do
         expect(decoded).to eq('123f')
         decoded = basehangul.decode('꺽먹꼐빗')
         expect(decoded).to eq('123g')
+        decoded = basehangul.decode('꺽먹께겔꼍뮷듕빎')
+        expect(decoded).to eq('12345678d')
+        decoded = basehangul.decode('꺽먹께겔꼍뮷듕빔')
+        expect(decoded).to eq('12345678e')
+        decoded = basehangul.decode('꺽먹께겔꼍뮷듕빕')
+        expect(decoded).to eq('12345678f')
+        decoded = basehangul.decode('꺽먹께겔꼍뮷듕빗')
+        expect(decoded).to eq('12345678g')
       end
     end
   end
