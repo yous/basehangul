@@ -121,5 +121,32 @@ RSpec.describe BaseHangul do
         expect(decoded).to eq('12345678g')
       end
     end
+
+    context 'when string has wrong number of padding characters' do
+      it 'decodes hangul to binary' do
+        decoded = basehangul.decode('꺽')
+        expect(decoded).to eq('1')
+        decoded = basehangul.decode('꺽흐')
+        expect(decoded).to eq('1')
+        decoded = basehangul.decode('꺽흐흐')
+        expect(decoded).to eq('1')
+        decoded = basehangul.decode('꺽흐흐흐흐')
+        expect(decoded).to eq('1')
+        decoded = basehangul.decode('꺽먈')
+        expect(decoded).to eq('12')
+        decoded = basehangul.decode('꺽먹꺄')
+        expect(decoded).to eq('123')
+        decoded = basehangul.decode('꺽먹께겔꼍')
+        expect(decoded).to eq('123456')
+        decoded = basehangul.decode('꺽먹께겔꼍뮨')
+        expect(decoded).to eq('1234567')
+        decoded = basehangul.decode('꺽먹께겔꼍뮷됩')
+        expect(decoded).to eq('12345678')
+        decoded = basehangul.decode('꺽먹꼍녜흐')
+        expect(decoded).to eq('123ab')
+        decoded = basehangul.decode('꺽먹께겔꼍뮷뒝낮흐흐')
+        expect(decoded).to eq('1234567890')
+      end
+    end
   end
 end
