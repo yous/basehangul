@@ -58,6 +58,25 @@ module BaseHangul
         .encode(Encoding::UTF_8)
     end
 
+    # Convert BaseHangul indices to hangul string.
+    #
+    # Examples
+    #
+    #   decode_indices([196, -1, -1, -1])
+    #   # => '꺽흐흐흐'
+    #
+    # Returns the String decoded binary.
+    def self.decode_indices(indices)
+      binary = indices.map do |index|
+        case index
+        when 0..1023    then index.to_s(2).rjust(10, '0')
+        when 1024..1027 then (index - 1024).to_s(2).rjust(2, '0')
+        end
+      end.join
+      binary = binary[0..-(binary.size % 8 + 1)]
+      [binary].pack('B*')
+    end
+
     # Slice a string into chunks of a given size.
     #
     # str  - The String to slice.

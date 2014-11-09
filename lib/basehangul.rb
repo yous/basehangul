@@ -46,15 +46,7 @@ module BaseHangul
   #
   # Returns the String decoded binary.
   def self.decode(str)
-    indices = str.each_char.map { |ch| Utils.to_index(ch) }
-    binary = indices.map do |index|
-      case index
-      when 0..1023    then index.to_s(2).rjust(10, '0')
-      when 1024..1027 then (index - 1024).to_s(2).rjust(2, '0')
-      end
-    end.join
-    binary = binary[0..-(binary.size % 8 + 1)]
-    [binary].pack('B*')
+    Utils.decode_indices(str.each_char.map { |ch| Utils.to_index(ch) })
   end
 
   # Public: Decode BaseHangul string.
@@ -71,13 +63,6 @@ module BaseHangul
       indices << index
     end
     fail ArgumentError, MSG_INVALID_PADDING unless str =~ REGEX_BASEHANGUL
-    binary = indices.map do |index|
-      case index
-      when 0..1023    then index.to_s(2).rjust(10, '0')
-      when 1024..1027 then (index - 1024).to_s(2).rjust(2, '0')
-      end
-    end.join
-    binary = binary[0..-(binary.size % 8 + 1)]
-    [binary].pack('B*')
+    Utils.decode_indices(indices)
   end
 end

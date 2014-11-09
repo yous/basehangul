@@ -51,6 +51,62 @@ RSpec.describe BaseHangul::Utils do
     end
   end
 
+  describe '.decode_indices' do
+    it 'returns empty string for empty array' do
+      decoded = utils.decode_indices([])
+      expect(decoded).to eq('')
+    end
+
+    context 'when there is no padding indices' do
+      it 'decodes indices to binary' do
+        decoded = utils.decode_indices([196, 803, 216, 354])
+        expect(decoded).to eq('123ab')
+        decoded = utils.decode_indices([196, 803, 217, 0])
+        expect(decoded).to eq("123d\x00")
+        decoded = utils.decode_indices([196, 803, 205, 53, 216, 883, 526, 304])
+        expect(decoded).to eq('1234567890')
+        decoded = utils.decode_indices([196, 803, 205, 53, 216, 883, 537, 0])
+        expect(decoded).to eq("12345678d\x00")
+      end
+    end
+
+    context 'when there are padding characters' do
+      it 'decodes indices to binary' do
+        decoded = utils.decode_indices([196, -1, -1, -1])
+        expect(decoded).to eq('1')
+        decoded = utils.decode_indices([196, 800, -1, -1])
+        expect(decoded).to eq('12')
+        decoded = utils.decode_indices([196, 803, 192, -1])
+        expect(decoded).to eq('123')
+        decoded = utils.decode_indices([196, 803, 205, 53, 216, 880, -1, -1])
+        expect(decoded).to eq('1234567')
+        decoded = utils.decode_indices([196, 803, 205, 53, 216, 883, 512, -1])
+        expect(decoded).to eq('12345678')
+      end
+    end
+
+    context 'when there are special characters' do
+      it 'decodes indices to binary' do
+        decoded = utils.decode_indices([196, 803, 217, 1024])
+        expect(decoded).to eq('123d')
+        decoded = utils.decode_indices([196, 803, 217, 1025])
+        expect(decoded).to eq('123e')
+        decoded = utils.decode_indices([196, 803, 217, 1026])
+        expect(decoded).to eq('123f')
+        decoded = utils.decode_indices([196, 803, 217, 1027])
+        expect(decoded).to eq('123g')
+        decoded = utils.decode_indices([196, 803, 205, 53, 216, 883, 537, 1024])
+        expect(decoded).to eq('12345678d')
+        decoded = utils.decode_indices([196, 803, 205, 53, 216, 883, 537, 1025])
+        expect(decoded).to eq('12345678e')
+        decoded = utils.decode_indices([196, 803, 205, 53, 216, 883, 537, 1026])
+        expect(decoded).to eq('12345678f')
+        decoded = utils.decode_indices([196, 803, 205, 53, 216, 883, 537, 1027])
+        expect(decoded).to eq('12345678g')
+      end
+    end
+  end
+
   describe '.chunks' do
     context 'with empty string' do
       it 'returns an empty array' do
