@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0 (2014-11-12)
+
+- Implement CLI of BaseHangul
+
 ## 1.1.0 (2014-11-08)
 
 - Make `BaseHangul.decode` to ignore invalid characters
