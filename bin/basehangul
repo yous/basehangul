@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+$LOAD_PATH.unshift(File.expand_path('../../lib', File.realpath(__FILE__)))
+require 'basehangul'
+
+cli = BaseHangul::CLI.new
+exit cli.run

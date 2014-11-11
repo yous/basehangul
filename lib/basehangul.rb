@@ -2,6 +2,8 @@
 
 require 'basehangul/version'
 require 'basehangul/utils'
+require 'basehangul/option'
+require 'basehangul/cli'
 
 # Human-readable binary encoding.
 module BaseHangul

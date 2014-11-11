@@ -39,6 +39,42 @@ BaseHangul.decode('넥라똔먈늴멥갯놓궂뗐밸뮤뉴뗐뀄굡덜멂똑뚤'
 # => 'This is an encoded string'
 ```
 
+Run `basehangul` with no arguments to encode binary through terminal input.
+
+``` sh
+basehangul
+```
+
+Or pass `basehangul` a file to encode.
+
+``` sh
+basehangul binary.txt
+```
+
+Run `basehangul` with no arguments to decode BaseHangul string through terminal input.
+
+``` sh
+basehangul -D
+```
+
+Or pass `basehangul` a file to decode.
+
+``` sh
+basehangul -D basehangul.txt
+```
+
+For additional command-line options:
+
+``` sh
+basehangul -h
+```
+
+Command flag    | Description
+----------------|--------------------
+`-D, --decode`  | Decode the input.
+`-h, --help`    | Print this message.
+`-v, --version` | Print version.
+
 ## Contributing
 
 1. Fork it (https://github.com/yous/basehangul/fork)
