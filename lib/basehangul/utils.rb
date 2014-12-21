@@ -97,7 +97,7 @@ module BaseHangul
     #   # => []
     #
     # Returns an Array of chunked Strings.
-    # Raises ArgumentError if the size is smaller then or equal to 0.
+    # Raises ArgumentError if the size is smaller than or equal to 0.
     def self.chunks(str, size)
       fail ArgumentError, 'Invalid slice size' if size <= 0
       new_str = str.dup
