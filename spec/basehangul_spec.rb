@@ -114,17 +114,17 @@ RSpec.describe BaseHangul do
 
     context 'when string has wrong number of padding characters' do
       it 'raises ArgumentError' do
-        strings = ['꺽', # rubocop:disable Style/WordArray
-                   '꺽흐',
-                   '꺽흐흐',
-                   '꺽흐흐흐흐',
-                   '꺽먈',
-                   '꺽먹꺄',
-                   '꺽먹께겔꼍',
-                   '꺽먹께겔꼍뮨',
-                   '꺽먹께겔껼뮷됩',
-                   '꺽먹꼍녜흐',
-                   '꺽먹께겔꼍뮷뒝낮흐흐']
+        strings = %w(꺽
+                     꺽흐
+                     꺽흐흐
+                     꺽흐흐흐흐
+                     꺽먈
+                     꺽먹꺄
+                     꺽먹께겔꼍
+                     꺽먹께겔꼍뮨
+                     꺽먹께겔껼뮷됩
+                     꺽먹꼍녜흐
+                     꺽먹께겔꼍뮷뒝낮흐흐)
         strings.each do |encoded|
           expect { basehangul.strict_decode(encoded) }
             .to raise_error(ArgumentError, msg_invalid_padding)
@@ -134,11 +134,11 @@ RSpec.describe BaseHangul do
 
     context 'when string has characters after padding characters' do
       it 'raises ArgumentError' do
-        strings = ['꺽흐꺽흐흐흐', # rubocop:disable Style/WordArray
-                   '꺽흐흐흐꺽흐흐흐',
-                   '꺽먹꺄흐꺽',
-                   '꺽먹께흐겔꼍흐흐흐',
-                   '꺽먹꼐흐꺽먹꼐빎']
+        strings = %w(꺽흐꺽흐흐흐
+                     꺽흐흐흐꺽흐흐흐
+                     꺽먹꺄흐꺽
+                     꺽먹께흐겔꼍흐흐흐
+                     꺽먹꼐흐꺽먹꼐빎)
         strings.each do |encoded|
           expect { basehangul.strict_decode(encoded) }
             .to raise_error(ArgumentError, msg_invalid_padding)
@@ -148,9 +148,9 @@ RSpec.describe BaseHangul do
 
     context 'when string has special characters with wrong position' do
       it 'raises ArgumentError' do
-        strings = ['꺽먹꼐빎꺽흐흐흐', # rubocop:disable Style/WordArray
-                   '꺽먹빎',
-                   '꺽먹빎흐']
+        strings = %w(꺽먹꼐빎꺽흐흐흐
+                     꺽먹빎
+                     꺽먹빎흐)
         strings.each do |encoded|
           expect { basehangul.strict_decode(encoded) }
             .to raise_error(ArgumentError, msg_invalid_padding)
