@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = %w(yousbe@gmail.com)
   spec.summary       = 'Human-readable binary encoding, BaseHangul for Ruby.'
   spec.description   = 'Human-readable binary encoding, BaseHangul for Ruby.'
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/yous/basehangul'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
