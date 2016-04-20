@@ -89,4 +89,4 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-Copyright (c) ChaYoung You. See [LICENSE.txt](LICENSE.txt) for further details.
+Copyright (c) Chayoung You. See [LICENSE.txt](LICENSE.txt) for further details.
