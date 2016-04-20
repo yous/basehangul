@@ -42,7 +42,7 @@ RSpec.shared_examples 'a decoder' do |method|
     end
 
     context 'when there are special characters' do
-      it 'decodes hangul to binary 'do
+      it 'decodes hangul to binary' do
         decoded = decode.call('꺽먹꼐빎')
         expect(decoded).to eq('123d')
         decoded = decode.call('꺽먹꼐빔')

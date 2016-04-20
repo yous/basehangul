@@ -24,7 +24,7 @@ RSpec.describe BaseHangul::Utils do
                'A', 'b', '1',
                '갂', '갃', '뷁',
                *('빙'.encode(Encoding::EUC_KR)..'힝'.encode(Encoding::EUC_KR))
-                .map { |v| v.encode(Encoding::UTF_8) }]
+                 .map { |v| v.encode(Encoding::UTF_8) }]
       range.reject { |v| v == padding }.each do |hangul|
         index = utils.to_index(hangul)
         expect(index).to eq(nil)

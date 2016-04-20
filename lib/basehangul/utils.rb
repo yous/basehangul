@@ -52,9 +52,10 @@ module BaseHangul
     # Raises IndexError if the index is out of range 0..1027.
     def self.to_hangul(index)
       if index < 0 || index > 1027
-        fail IndexError, "Index #{index} outside of valid range: 0..1027"
+        raise IndexError, "Index #{index} outside of valid range: 0..1027"
       end
-      (index / 0x5E * 0x100 + index % 0x5E + 0xB0A1).chr(Encoding::EUC_KR)
+      (index / 0x5E * 0x100 + index % 0x5E + 0xB0A1)
+        .chr(Encoding::EUC_KR)
         .encode(Encoding::UTF_8)
     end
 
@@ -99,7 +100,7 @@ module BaseHangul
     # Returns an Array of chunked Strings.
     # Raises ArgumentError if the size is smaller than or equal to 0.
     def self.chunks(str, size)
-      fail ArgumentError, 'Invalid slice size' if size <= 0
+      raise ArgumentError, 'Invalid slice size' if size <= 0
       new_str = str.dup
       array = []
       array << new_str.slice!(0...size) until new_str.empty?

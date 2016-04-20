@@ -11,10 +11,10 @@ module BaseHangul
   PADDING = '흐'.freeze
 
   # Error message for invalid character.
-  MSG_INVALID_CHAR = 'Invalid character found'
+  MSG_INVALID_CHAR = 'Invalid character found'.freeze
 
   # Error message for incorrect padding.
-  MSG_INVALID_PADDING = 'Invalid padding'
+  MSG_INVALID_PADDING = 'Invalid padding'.freeze
 
   # Regular expression for BaseHangul.
   REGEX_BASEHANGUL = Regexp.new('^(?:[^빎빔빕빗흐]{4})*' \
@@ -61,10 +61,10 @@ module BaseHangul
     indices = []
     str.each_char do |ch|
       index = Utils.to_index(ch)
-      fail ArgumentError, MSG_INVALID_CHAR if index.nil?
+      raise ArgumentError, MSG_INVALID_CHAR if index.nil?
       indices << index
     end
-    fail ArgumentError, MSG_INVALID_PADDING unless str =~ REGEX_BASEHANGUL
+    raise ArgumentError, MSG_INVALID_PADDING unless str =~ REGEX_BASEHANGUL
     Utils.decode_indices(indices)
   end
 end

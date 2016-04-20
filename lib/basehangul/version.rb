@@ -3,6 +3,6 @@
 module BaseHangul
   # Holds the BaseHangul version information.
   module Version
-    STRING = '1.2.0'
+    STRING = '1.2.0'.freeze
   end
 end
